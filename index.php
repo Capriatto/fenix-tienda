@@ -177,9 +177,10 @@ if(isset($_GET['err']) && $_GET['err']==3) {
 
 //////////////////////////////////////////////////////////
 
+/*
 
 function enviarBase(){
-require "crud.php";
+//require "crud.php";
 	
 if(isset($_POST['submit'])){
 	$base= $_REQUEST['txtBase'];
@@ -214,6 +215,7 @@ validarBase();
 
 
 
+*/
 
 ?>
 

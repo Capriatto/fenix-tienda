@@ -7,19 +7,19 @@
 	
 	date_default_timezone_set('America/Bogota');
 	$fechaactual=date("Y-m-d");
-	
-	$diario="select * from diario";
+
+	$diario="select * from diario where fecha='$fechaactual'";
 	$resultado= mysql_query($diario,$conexion);
 	$result=mysql_fetch_array($resultado);
 
     $base=$result['base'];
-    $totaldia=$result['total_dia'];
 
-    echo $base."-".$totaldia;
+    echo $base."-";
 
     if($base==''){
-    	header("Location: botones_admin_factura.php");
+    	header("Location: index.php?err=2");
     }
+
 
 	if($_POST['btnsave']=='save'){
 		//Datos de la tabla factura
