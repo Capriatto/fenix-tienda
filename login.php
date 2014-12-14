@@ -5,7 +5,6 @@
 
 
   if($_POST['btnLogin']=='Entrar'){
-	  echo "entrando";
     $user=$_REQUEST['usuario']; 
     $pass=$_REQUEST['contrasena']; 
 
@@ -20,7 +19,7 @@
     if ($user==$user2 && $pass==$pass2) {
         $_SESSION['ingreso']='YES';
         $_SESSION['userapp']=$result['nombre'];
-        header("Location: index.php");
+        header("Location: bienvenida.php");
     }else{
       echo"<script>alert('Usuario o Contraseña incorrectos');</script>";
     }

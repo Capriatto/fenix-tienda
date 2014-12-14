@@ -1,5 +1,6 @@
 <?php
 require('fpdf17/fpdf.php');
+if(isset($_REQUEST['m'])){
 $pdf=new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
@@ -22,9 +23,10 @@ $pdf->Cell(450,7,"--------------------------------------------------------------
 $pdf->Ln();
 
         require ('conexion.php');
-        $sql = "SELECT codigo, base, total_dia, gastos, inversiones, ventas, fecha FROM diario WHERE 			YEAR(`fecha`) = YEAR(CURRENT_DATE()) AND MONTH(`fecha`)=".$_REQUEST['m'].';';
+		
+        $sql = "SELECT codigo, base, total_dia, gastos, inversiones, ventas, fecha FROM diario WHERE 		 YEAR(`fecha`) = YEAR(CURRENT_DATE()) AND MONTH(`fecha`)=".$_REQUEST['m'].' ORDER BY fecha 				ASC;';
         
-		$sql2 = "SELECT SUM(valor) FROM gasto";
+		$sql2 = "SELECT SUM(valor) FROM diario WHERE YEAR(`fecha`) = YEAR(CURRENT_DATE()) AND 					MONTH(`fecha`)=".$_REQUEST['m'].';';
 		$result = mysql_query($sql);
 		$result2= mysql_query($sql2);	
         while($rows=mysql_fetch_array($result))
@@ -49,4 +51,7 @@ $pdf->Ln();
         }
 		
 $pdf->Output();
+}else{
+header("Location: reportes.php");
+}
 ?>

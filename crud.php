@@ -21,7 +21,7 @@
 				echo '<script>avisoError(" ¡Error! No se pudo registrar la empresa");</script>';
 				
 				$_SESSION['ciudad']="";
-				echo"<script>alert('Ocurrió un error y no se pudo registrar la empresa');</script>";					}			
+				echo"<script>avisoError('Ocurrió un error y no se pudo registrar la empresa');</script>";					}			
 			
 		}else{
 
@@ -36,8 +36,9 @@
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
 			$_SESSION['ciudad']="";
-			echo"<script>alert('Se actualizaron los datos de la empresa');</script>";
-			echo"<script>window.location='buscar_empresa.php?opcion=1';</script>";
+			echo"<script>avisoExitoso('Se actualizaron los datos de la empresa');</script>";
+			echo "<script>setTimeout(\"window.location='buscar_empresa.php?opcion=1';\",5000);</script>";
+			//echo"<script>window.location='buscar_empresa.php?opcion=1';</script>";
 		}else{
 			echo '<script>avisoError("¡Error! La empresa ya está registrada")</script>';
 		}
@@ -61,7 +62,8 @@
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
 			echo '<script>avisoExitoso("Datos de cliente actualizados satisfactoriamente.");</script>';
-			echo"<script>window.location='buscar_cliente.php?opcion=1';</script>";
+			echo "<script>setTimeout(\"window.location='buscar_cliente.php?opcion=1';\",5000);</script>";
+			//echo"<script>window.location='buscar_cliente.php?opcion=1';</script>";
 		}else{
 			echo '<script>avisoError(" ¡Error! No se pudo actualizar el cliente.");</script>';
 		}		
@@ -90,14 +92,79 @@
 		$codigo= generarCodigo("CJA-","diario");
 		date_default_timezone_set('America/Bogota');
 		$fecha=  date('Y-m-d');
-		$consulta= "INSERT INTO diario (id, codigo, base, fecha) VALUES ($id, '$codigo','$base', '$fecha')";
-		$resul= mysql_query($consulta,$conexion);
-		if($resul){
-			echo '<script>avisoExitoso("Se abrió la caja.");</script>';
+
+		$diario="select base from diario where fecha='$fecha'";
+		$resultado= mysql_query($diario,$conexion);
+		$result=mysql_fetch_array($resultado);
+		$basehoy=$result['base'];
+
+		if($basehoy==''){
+			$consulta= "INSERT INTO diario (id, codigo, base, fecha) VALUES ($id, '$codigo','$base', '$fecha')";
+			$resul= mysql_query($consulta,$conexion);
+			if($resul){
+				echo '<script>avisoExitoso("Se abrió la caja.");</script>';
+			}else{
+				echo '<script>avisoError(" ¡Error! No se pudo abrir la caja.");</script>';
+			}
 		}else{
-			echo '<script>avisoError(" ¡Error! No se pudo abrir la caja.");</script>';
+			echo '<script>avisoError(" ¡Error! Ya se abrio caja.");</script>';
 		}
+
+
 	}
+	function CerrarCaja($totalHoy){
+		require("conexion.php");
+		date_default_timezone_set('America/Bogota');
+		$fechaHoy= date("Y-m-d");
+		
+		$diario="select base, total_dia from diario where fecha='$fechaHoy'";
+
+		$resultado= mysql_query($diario,$conexion);
+		$result=mysql_fetch_array($resultado);
+		$base=$result['base'];
+		$total_dia= $result['total_dia'];
+		
+	 	if($base==''){
+    		echo '<script>avisoError("¡Error! No se ha abierto la caja");</script>';
+		}else{
+			if($total_dia==''){
+				$consultaBaseHoy= "SELECT IF(base IS NULL,0, base) FROM diario WHERE fecha='$fechaHoy'";
+				//echo $consultaBaseHoy;
+				$consultaInversionesHoy = "SELECT IF(sum(valor_total) IS NULL,0, sum(valor_total)) AS sumGastos from factura WHERE fecha='$fechaHoy'";
+				//echo $consultaInversionesHoy;
+				$consultaGastosHoy ="SELECT IF(sum(valor) IS NULL,0, sum(valor)) AS sumGastos FROM gasto WHERE fecha='$fechaHoy'";
+				//echo $consultaGastosHoy;
+
+				$baseHoy = mysql_result(mysql_query($consultaBaseHoy, $conexion), 0);
+				$inversionesHoy = mysql_result(mysql_query($consultaInversionesHoy, $conexion), 0);
+				$gastosHoy= mysql_result(mysql_query($consultaGastosHoy, $conexion), 0);
+				
+
+				
+				//echo $totalHoy."-";
+
+				$ventasHoy= $totalHoy - ( $baseHoy - ($inversionesHoy + $gastosHoy ));
+				//echo $ventasHoy."-";
+
+				$consulta= "UPDATE diario SET total_dia=$totalHoy, gastos=$gastosHoy,inversiones=$inversionesHoy, ventas=$ventasHoy WHERE fecha='$fechaHoy'";
+			
+
+				$resultadoQuery=mysql_query($consulta, $conexion);
+				if($resultadoQuery){
+					echo '<script>avisoExitoso("Caja cerrada satisfactoriamente.");</script>';
+				}else{
+					echo '<script>avisoError("¡Error! No se pudo cerrar caja");</script>';
+				}
+			
+			}else{
+				echo '<script>avisoError("¡Error! La caja ya fue cerrada");</script>';
+			}
+			
+		}		
+		
+		//echo"<script>window.location='index.php';</script>";
+		
+	}	
 
 	function eliminarGasto($codigo){
 		require("conexion.php");
@@ -107,10 +174,11 @@
 		$consulta="DELETE from gasto where codigo='$codigo'";		
 		$resul= mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se eliminó el gasto');</script>";
-			echo"<script>window.location='buscar_gasto.php?opcion=1';</script>";
+			echo"<script>avisoExitoso('Se eliminó el gasto');</script>";
+			echo "<script>setTimeout(\"window.location='buscar_gasto.php?opcion=1';\",4500);</script>";
+			//echo"<script>window.location='buscar_gasto.php?opcion=1';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se eliminó el gasto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se eliminó el gasto');</script>";
 		}
 	}
 
@@ -122,9 +190,9 @@
 		$resul= mysql_query($consulta,$conexion);
 
 		if($resul){
-			echo"<script>alert('Se registró el tipo gasto');</script>";
+			echo"<script>avisoExitoso('Se registró el tipo gasto');</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se registró el tipo gasto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se registró el tipo gasto');</script>";
 		}		
 	}
 
@@ -133,10 +201,11 @@
 		$consulta="update tipo_gasto set nombre='$nombre' where codigo='$codigo'";
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se actualizó el tipo de gasto');</script>";
-			echo"<script>window.location='buscar_tipo_gasto.php?opcion=1';</script>";
+			echo"<script>avisoExitoso('Se actualizó el tipo de gasto');</script>";
+			echo "<script>setTimeout(\"window.location='buscar_tipo_gasto.php?opcion=1';\",4700);</script>";
+			//echo"<script>window.location='buscar_tipo_gasto.php?opcion=1';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se actualizó el tipo de gasto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se actualizó el tipo de gasto');</script>";
 		}		
 	}	
 
@@ -146,10 +215,11 @@
 		$consulta="insert into credito values('$id','$codigo','$fecha','$observacion','$total','$cliente')";
 		$resul= mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se registró el crédito');</script>";
-			echo"<script>window.location='registrar_cliente.php';</script>";
+			echo"<script>avisoExitoso('Se registró el crédito');</script>";
+			echo "<script>setTimeout(\"window.location='registrar_cliente.php';\",4700);</script>";
+			//echo"<script>window.location='registrar_cliente.php';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se registró el crédito');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se registró el crédito');</script>";
 		}		
 	}
 
@@ -159,10 +229,11 @@
 		$consulta="insert into abono values('$id','$codigo','$fecha','$total','$cliente')";
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se registró el abono');</script>";
-			echo"<script>window.location='registrar_cliente.php';</script>";
+			echo"<script>avisoExitoso('Se registró el abono');</script>";
+			echo "<script>setTimeout(\"window.location='registrar_cliente.php';\",4700);</script>";
+			//echo"<script>window.location='registrar_cliente.php';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se registró el abono');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se registró el abono');</script>";
 		}			
 	}	
 
@@ -174,9 +245,9 @@
 		if($resul){
 			$consulta2="insert into empresa_producto values('$nit','$codigo','$vcompra','$vventa')";
 			$resul2=mysql_query($consulta2,$conexion);
-			echo"<script>alert('Se registró el producto');</script>";
+			echo"<script>avisoExitoso('Se registró el producto');</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se pudo registrar el producto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se pudo registrar el producto');</script>";
 		}
 	}
 
@@ -185,10 +256,11 @@
 		$consulta="update producto set nombre='$descripcion' where codigo='$codigo'";
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se actualizó la descripción del producto');</script>";
-			echo"<script>window.location='buscar_producto_3.php?opcion=1';</script>";
+			echo"<script>avisoExitoso('Se actualizó la descripción del producto');</script>";
+			echo "<script>setTimeout(\"window.location='buscar_producto_3.php?opcion=1';\",4700);</script>";
+			//echo"<script>window.location='buscar_producto_3.php?opcion=1';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se actualizó la descripción del producto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se actualizó la descripción del producto');</script>";
 		}		
 	}
 
@@ -197,10 +269,11 @@
 		$consulta="update empresa_producto set valor_compra='$vcompra',valor_venta='$vventa' where empresa_nit='$nit' and producto_codigo='$producto'";
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se actualizaron los precios del producto');</script>";
-			echo"<script>window.location='buscar_producto.php?opcion=1';</script>";
+			echo"<script>avisoExitoso('Se actualizaron los precios del producto');</script>";
+			echo "<script>setTimeout(\"window.location='buscar_producto.php?opcion=1';\",4700);</script>";
+			//echo"<script>window.location='buscar_producto.php?opcion=1';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se actualizaron los precios del producto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se actualizaron los precios del producto');</script>";
 		}		
 	}
 
@@ -209,19 +282,31 @@
 		$consulta="insert into empresa_producto values('$nit','$producto','$vcompra','$vventa')";
 		$resul=mysql_query($consulta,$conexion);
 		if($resul){
-			echo"<script>alert('Se agregó el proveedor');</script>";
-			echo"<script>window.location='buscar_producto_3.php?opcion=2';</script>";
+			echo"<script>avisoExitoso('Se agregó el proveedor');</script>";
+			echo "<script>setTimeout(\"window.location='buscar_producto_3.php?opcion=2';\",4700);</script>";
+			//echo"<script>window.location='buscar_producto_3.php?opcion=2';</script>";
 		}else{
-			echo"<script>alert('Ocurrió un error y no se agregó el proveedor al producto');</script>";
+			echo"<script>avisoError('Ocurrió un error y no se agregó el proveedor al producto');</script>";
 		}			
 	}	
 
 	function guardarFactura1($codfac,$vtotal,$empresa,$fecha,$codproducto,$cantidadproducto,$totalproducto){
 		require("conexion.php");
 		$id= generarId("factura");
+		
+		$diario="select * from diario where fecha='$fecha'";
+		$resultado= mysql_query($diario,$conexion);
+		$result=mysql_fetch_array($resultado);
 
+	    $base=$result['base'];
+	    $totaldia=$result['total_dia'];
 
+	    
 
+	    if($totaldia!=''){
+	    	echo '<script>alert("No puede registrar facturas. La caja ya se ha cerrado");</script>';
+	    	echo "<script>window.location='botones_admin_factura.php';</script>";
+	    }
 
 		//Inicio de la transaccion
 		$consulta="START TRANSACTION";
@@ -307,7 +392,7 @@
 		
 		offset: {
 			x: 20,
-			y: 340
+			y: 360
 		}
 		});
 	
@@ -320,11 +405,14 @@
 				exit: 'animated zoomOutUp'
 			},
 			type: "error",
+			
 		
 		offset: {
 			x: 20,
-			y: 340
-		}
+			y: 360
+		},
+		
+			
 		});
 	
 	}

@@ -9,7 +9,7 @@
     <link rel="icon" href="img/favicon.ico">
 	<link rel="stylesheet" href="css/font-awesome-animation.min.css">
     <title>SteWapp</title>
-    <script src="js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!--WebFont-->
 	<script src="http://use.edgefonts.net/medula-one:n4:all.js"></script><!--fin webFont-->
@@ -26,6 +26,7 @@
 
   <body>
     <?php
+      //error_reporting(0);
       require('seguridad.php');      
     ?>
   <form name="index-form" method="post" action="index.php">
@@ -40,7 +41,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand"><?php echo $_SESSION['userapp'];?></a>
+          <a class="navbar-brand" href="#"><?php echo $_SESSION['userapp'];?></a>
+          <!--<a class="navbar-brand" href="index.php">Ir a página principal</a>-->
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -53,9 +55,9 @@
 	  
 	<div class="jumbotron">
   <h1 class="font-title">Bienvenido a SteWapp  <span class="glyphicon glyphicon-shopping-cart faa-horizontal animated"></span></h1><br/>
-  <a href="abrir_caja.php" id='admincaja' class="btn btn-primary btn-lg "><span class="glyphicon glyphicon-asterisk"></span> Abrir Caja</a>
-  <a href="cerrar_caja.php" id='admincaja' class="btn btn-primary btn-lg "><span class="glyphicon glyphicon-asterisk"></span> Cerrar Caja</a>
-  
+  <button type="button" id="abrirCaja" href="#myModal" class="btn btn-primary btn-lg " data-toggle="modal"><span class="glyphicon glyphicon-asterisk"></span> Abrir Caja</button>
+  <button type="button" href="#modalCerrarCaja" data-toggle="modal" class="btn btn-primary btn-lg ">Cerrar Caja</button>
+<button type="button" onclick="aviso('Empresa registrada exitosamente. ');" class="btn btn-primary btn-lg ">Notificacion</button>
 	</div>
 	 
 
@@ -64,7 +66,7 @@
 		  <p href="#" class="list-group-item active">Administración</p>
           <a href="botones_admin_empresa.php" id='adminempresa' class="list-group-item">Registrar Empresa</a>
           <a href="botones_admin_productos.php" id='adminempresa' class="list-group-item">Administrar Productos</a>
-          <a href="consolidado_ventas1.php" class="list-group-item ">Consolidado Ventas</a>
+          <a href="#" class="list-group-item ">Consolidado Ventas</a>
           <a href="botones_admin_factura.php"  id="adminfactura" class="list-group-item">Registrar Factura</a>
           <a href="botones_admin_gasto.php" class="list-group-item">Registrar Gasto</a>
           <a href="botones_admin_clientes.php" class="list-group-item">Administrar Clientes</a>
@@ -76,7 +78,16 @@
   </div>
 
   <div id="page-container">
-
+    <?php
+      //error_reporting(0);
+      require('crud.php');
+      if($_POST['btnabrircaja']=='abrircaja'){
+        echo "hola";
+      }else{
+        echo "no";
+      }
+      
+    ?>
 	 
   </div>
 	  
@@ -176,6 +187,49 @@ if(isset($_GET['err']) && $_GET['err']==3) {
 }
 
 
+
+//////////////////////////////////////////////////////////
+
+/*
+
+function enviarBase(){
+//require "crud.php";
+	
+if(isset($_POST['submit'])){
+	$base= $_REQUEST['txtBase'];
+	guardarBase($base);
+	header("Location: index.php");
+}else{
+	header("Location: index.php");
+}
+}
+
+function validarBase(){
+	require('conexion.php');
+	date_default_timezone_set('America/Bogota');
+	$fecha=  date('Y-m-d');
+	
+	$consulta="SELECT COUNT(id) FROM diario WHERE fecha='$fecha'";
+	$resultado= mysql_query($consulta, $conexion);
+	
+	$fila= mysql_fetch_array($resultado);
+	
+	
+	if($fila[0]== 0){
+		enviarBase();
+	}else{
+		errorAbriendoCaja();
+		header("Location: index.php?err=1");
+	}
+}
+
+validarBase();
+
+
+
+
+*/
+
 ?>
 
 <script>
@@ -191,4 +245,19 @@ if(isset($_GET['err']) && $_GET['err']==3) {
     javascript:window.history.forward(1);
     javascript:window.history.back(1); 
   }
+	function aviso(texto){
+		$.growl(texto, {
+			animate: {
+				enter: 'animated zoomInDown',
+				exit: 'animated zoomOutUp'
+			},
+			type: "growl",
+		
+		offset: {
+			x: 20,
+			y: 340
+		}
+		});
+	
+	}
 </script>

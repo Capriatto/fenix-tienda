@@ -74,7 +74,7 @@
   <div class="col-md-7">
     <div class="input-group">
       <span class="input-group-addon">Valor Compra</span>
-      <input id="vcompra" name="vcompra" class="form-control" pattern="[0-9]{1,10}" title="Solo puede ingresar números" placeholder="Ingrese el valor en números, sin usar puntos, comas o espacios." required>
+      <input id="vcompra" name="vcompra" class="form-control" pattern="[0-9]{1,10}" title="Solo puede ingresar números"  required>
     </div>
    </div>
   </div>
@@ -83,7 +83,7 @@
   <div class="col-md-7">
     <div class="input-group">
       <span class="input-group-addon">Valor Venta</span>
-      <input id="vventa" name="vventa" class="form-control" pattern="[0-9]{1,10}" title="Solo puede ingresar números" placeholder="Ingrese el valor en números, sin usar puntos, comas o espacios." required>
+      <input id="vventa" name="vventa" class="form-control" pattern="[0-9]{1,10}" title="Solo puede ingresar números"  required>
     </div>
    </div>
   </div>

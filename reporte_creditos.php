@@ -1,5 +1,6 @@
 <?php
 require('fpdf17/fpdf.php');
+if(isset($_REQUEST['m'])){
 $pdf=new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
@@ -18,7 +19,7 @@ $pdf->Cell(450,7,"--------------------------------------------------------------
 $pdf->Ln();
 		
         require ('conexion.php');
-		$sql = "SELECT codigo,nombre,total_deuda FROM cliente";
+		$sql = "SELECT codigo,nombre,total_deuda FROM cliente WHERE total_deuda <> 0";
         $sql2 = "SELECT SUM(total_deuda) FROM cliente";
 		$result = mysql_query($sql);
 		$result2= mysql_query($sql2);	
@@ -44,4 +45,7 @@ $pdf->Ln();
 			$pdf->Cell(50,30,$suma_total);
 		}
 $pdf->Output();
+}else{
+header("Location: reportes.php");
+}
 ?>

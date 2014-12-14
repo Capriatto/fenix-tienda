@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   error_reporting(0);
   include('index.php');
 	require("conexion.php");
@@ -78,7 +78,7 @@
   <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-addon">Total Crédito</span>
-      <input type="text" id="total" name="total" class="form-control" pattern="[0-9]{1,7}" title="Solo puede ingresar números" placeholder="Ingrese el valor en números, sin usar puntos, comas...   o espacios" required>
+      <input type="text" id="total" name="total" class="form-control" pattern="[0-9]{1,7}" title="Solo puede ingresar números" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
     </div>
    </div>
   </div>

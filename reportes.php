@@ -11,7 +11,7 @@ include("index.php");
 	<body>
 		<fieldset>
 		<div class="page-container">
-		<h2 style="text-align:center;">ESTADÍSTICAS Y REPORTES</h2>
+		<h2 style="text-align:center;">GRÁFICA Y REPORTES</h2>
 		<br>
 		<?php
 		
@@ -47,13 +47,13 @@ include("index.php");
 			$chart->setLabels (array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", 				"Sep", "Oct", "Nov", "Dic"));
 		
 
-			echo"<a href='reporte_creditos.php' class='btn btn-config' target='blank'><i class='glyphicon 				glyphicon-list-alt'></i> Creditos</a>";
+			/*echo"<a href='reporte_creditos.php' class='btn btn-config' target='blank'><i 							class='glyphicon glyphicon-list-alt'></i> Creditos</a>";
 
 
 	  	 	echo"<a href='reporte_gastos.php' role='button' class='btn btn-config' target='blank'><i 					class='glyphicon glyphicon-list-alt'></i> Gastos Este Mes</a>";
 		
 
-			echo"<a href='reporte_diario.php' role='button' class='btn btn-config' target='blank'><i 					class='glyphicon glyphicon-list-alt'></i> Reporte Diario</a>";  
+			echo"<a href='reporte_diario.php' role='button' class='btn btn-config' target='blank'><i 					class='glyphicon glyphicon-list-alt'></i> Reporte Diario</a>"; */ 
 			
 			echo '<button type="button" href="#modalCredito" class="btn btn-config" data-toggle="modal"><i 				class="glyphicon glyphicon-list-alt"></i> Reporte 						Creditos</button>';
 			  
@@ -89,22 +89,8 @@ include("index.php");
 				$this->addComponent ($chart);
 				
 			}
-			
-			
-
-			
 			 
 			
-			  
-
-			  
-			$chart2 = new ChartComponent("pie");
-    		$chart2->setCaption("Expenditures Incurred in Publishing a Book");
-    		$chart2->setDimensions (8, 6);
-    		$chart2->setLabels (["Paper Cost", "Binding", "Printing Cost", "Royality", "Transportation Cost"]);
-			$chart2->setPieValues ([25, 20, 20, 15, 10]);
-
-    $this->addComponent ($chart2); 
 		  }
 		}
 

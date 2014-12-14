@@ -1,5 +1,6 @@
 <?php
 require('fpdf17/fpdf.php');
+if(isset($_REQUEST['m'])){
 $pdf=new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
@@ -11,8 +12,8 @@ $pdf->Cell(80);
 $pdf->Cell(30,10,'GASTOS');
 $pdf->Ln(20);
 $pdf->Cell(25,7,"CODIGO");
-$pdf->Cell(35,7,"TIPO GASTO");
-$pdf->Cell(95,7,"OBSERVACION");
+$pdf->Cell(45,7,"TIPO GASTO");
+$pdf->Cell(85,7,"OBSERVACION");
 $pdf->Cell(20,7,"FECHA");
 $pdf->Cell(40,7,"VALOR");
 $pdf->Ln();
@@ -21,7 +22,7 @@ $pdf->Ln();
 
         require ('conexion.php');
 		
-        $sql = "SELECT g.codigo, tg.nombre , g.observacion, g.fecha, g.valor FROM gasto g, tipo_gasto tg 		WHERE g.tipo_gasto_codigo= tg.codigo and YEAR(`fecha`) = YEAR(CURRENT_DATE()) AND MONTH(`fecha`) 		=".$_REQUEST['m'].";";
+        $sql = "SELECT g.codigo, tg.nombre , g.observacion, g.fecha, g.valor FROM gasto g, tipo_gasto tg 		WHERE g.tipo_gasto_codigo= tg.codigo and YEAR(`fecha`) = YEAR(CURRENT_DATE()) AND MONTH(`fecha`) 		=".$_REQUEST['m']." ORDER BY fecha ASC;";
 
         $sql2 = "SELECT SUM(valor) FROM gasto WHERE YEAR(`fecha`) = YEAR(CURRENT_DATE()) AND 					MONTH(`fecha`)=".$_REQUEST['m'].";";
 		$result = mysql_query($sql);
@@ -35,8 +36,8 @@ $pdf->Ln();
 			$valor = $rows[4];
             
             $pdf->Cell(25,7,$codigo);
-			$pdf->Cell(35,7,$tipo_gasto);
-            $pdf->Cell(95,7,$observacion);
+			$pdf->Cell(45,7,$tipo_gasto);
+            $pdf->Cell(85,7,$observacion);
             $pdf->Cell(20,7,$fecha);
 			$pdf->Cell(40,7,$valor);
            
@@ -52,4 +53,7 @@ $pdf->Ln();
 			$pdf->Cell(50,30,$suma_total);
 		}
 $pdf->Output();
+}else{
+header("Location: reportes.php");
+}
 ?>

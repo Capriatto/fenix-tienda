@@ -38,7 +38,7 @@
 
 <div class="container">
   <a href="buscar_producto.php?opcion=1" role="button" class="btn btn-config"><i class="glyphicon glyphicon-plus"></i> Buscar Producto</a>
-  <a href="resgistrar_producto.php" role="button" class="btn btn-config"><i class="glyphicon glyphicon-plus"></i> Registrar Producto</a>
+  <a href="registrar_producto.php" role="button" class="btn btn-config"><i class="glyphicon glyphicon-plus"></i> Registrar Producto</a>
   <a href="buscar_producto_3.php?opcion=1" role="button" class="btn btn-config"><i class="glyphicon glyphicon-plus"></i> Editar Producto</a>
   <a href="buscar_producto_3.php?opcion=2" role="button" class="btn btn-config"><i class="glyphicon glyphicon-plus"></i> Agregar Proveedor de Producto</a>
 
@@ -88,7 +88,7 @@
   <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-addon">Valor Compra</span>
-      <input id="vcompra" name="vcompra" class="form-control" value="<?php echo $vcompra;?>" pattern="[0-9]{1,10}" title="Solo puede ingresar números" placeholder="Ingrese el valor en números, sin usar puntos, comas o espacios." required>
+      <input id="vcompra" name="vcompra" class="form-control" value="<?php echo $vcompra;?>" pattern="[0-9]{1,10}" title="Solo puede ingresar números" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
     </div>
    </div>
   </div>
@@ -97,7 +97,7 @@
   <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-addon">Valor Venta</span>
-      <input id="vventa" name="vventa" class="form-control" value="<?php echo $vventa;?>" pattern="[0-9]{1,10}" title="Solo puede ingresar números" placeholder="Ingrese el valor en números, sin usar puntos, comas o espacios." required>
+      <input id="vventa" name="vventa" class="form-control" value="<?php echo $vventa;?>" pattern="[0-9]{1,10}" title="Solo puede ingresar números" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
     </div>
    </div>
   </div>

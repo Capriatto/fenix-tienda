@@ -14,10 +14,8 @@
 
     $base=$result['base'];
 
-    echo $base."-";
-
     if($base==''){
-    	header("Location: index.php?err=2");
+    	header("Location: index.php");
     }
 
 
@@ -33,7 +31,7 @@
 		$codproducto=$_SESSION['codproducto'];		
 		$cantidadproducto=$_SESSION['cantpro'];
 		$totalproducto=$_SESSION['totalpro'];
-		echo $codproducto.'-'.$cantidadproducto.'-'.$totalproducto;		
+		//echo $codproducto.'-'.$cantidadproducto.'-'.$totalproducto;		
 		
 		if($codproducto!='' && $cantidadproducto!='' && $cantidadproducto!='0' && $totalproducto!=''){
 			guardarFactura1($codfac,$vtotal,$empresa,$fecha,$codproducto,$cantidadproducto,$totalproducto);

@@ -15,7 +15,7 @@
 		$tipogasto= $_REQUEST['tipogasto'];
 		
 		guardarGasto($codigo, $observacion, $valor,$fecha, $tipogasto);		
-		echo"<script>window.location='registrar_gasto.php';</script>";
+		
 	}
 
 	if(!empty($_POST) and $_POST['btnTipoGasto']=='guardarGasto'){
@@ -91,7 +91,7 @@
   <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-addon">Valor</span>
-      <input id="valor" name="valor" min="1" max="9999999" class="form-control" placeholder="valor del gasto sin puntos ni comas..." type="number" required>
+      <input id="valor" name="valor" min="1" max="9999999" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" placeholder="Ingrese el valor del gasto..." type="number" required>
     </div>
    </div>
   </div>
