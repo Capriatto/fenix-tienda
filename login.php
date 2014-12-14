@@ -7,9 +7,9 @@
   if($_POST['btnLogin']=='Entrar'){
     $user=$_REQUEST['usuario']; 
     $pass=$_REQUEST['contrasena']; 
-
+	  
     $usuario="select * from usuario where usuario='$user'";
-    $resultado=mysql_query($usuario,$conexion);
+	$resultado=mysql_query($usuario,$conexion);
     $result=mysql_fetch_array($resultado);
 
     $user2=$result['usuario'];

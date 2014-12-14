@@ -131,7 +131,6 @@ include_once("consolidado_ventas1.php");
 <script type="text/javascript">
 	$( document ).ready(function() {
 		$('#srch-term').attr('value', '<?php echo $_REQUEST['fecha'] ?>');
-		//$("fecha").attrr('value')= "2014-14-08";
 	});
 </script>
 

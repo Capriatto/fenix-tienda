@@ -1,6 +1,7 @@
 <?php
 include_once("index.php");
 include_once("conexion.php");
+date_default_timezone_set('America/Bogota');
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +34,7 @@ include_once("conexion.php");
  
     <div class="input-group add-on">
       <span class="input-group-addon">Fecha</span>
-      <input type="date" class="form-control" placeholder="Search" name="fecha" id="srch-term" 				  value="<?php echo date('Y-m-d');?>" required>
+      <input type="date" class="form-control" placeholder="Search" name="fecha" id="srch-term" 				  value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d');?>" required>
       <div class="input-group-btn">
         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i> 					Buscar</button>
       </div>
