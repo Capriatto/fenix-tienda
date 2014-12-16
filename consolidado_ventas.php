@@ -52,7 +52,24 @@ include_once("consolidado_ventas1.php");
 			}
 
 			$this->addComponent ($kpi);
-			 
+			
+				if(empty($result)){
+				$kpi5 = new KPIComponent ("utilities_kpi");
+				$kpi5->setDimensions (3, 2);
+				$kpi5->setCaption ("Utilidades del Día");
+				$kpi5->setValue (0, array(
+				"numberPrefix" => "$"
+			));
+			}else{
+				$kpi5 = new KPIComponent ("utilities_kpi");
+				$kpi5->setDimensions (3, 2);
+				$kpi5->setCaption ("Utilidades del Día");
+				// Calculando utilidades del día (ventas - 20%)
+				$kpi5->setValue (($result[0]['ventas'] - ($result[0]['ventas']*0.20)), array(
+				"numberPrefix" => "$"
+			));
+			}
+			$this->addComponent ($kpi5);
 			
 				$kpi1 = new KPIGroupComponent ('kpi');
 				$kpi1->setDimensions (10, 2);
