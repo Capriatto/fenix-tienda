@@ -1,7 +1,6 @@
 <?php
 include_once("index.php");
 include_once("conexion.php");
-date_default_timezone_set('America/Bogota');
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,7 @@ date_default_timezone_set('America/Bogota');
 	<div id="page-container">
 	<div class="alert alert-info alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span 		   class="sr-only">Close</span></button>
-  		<strong>Atención!</strong> Algunos datos se mostrarán en 0 porque se calculan al cerrar caja.
+  		<strong>Atención!</strong> Los datos podrían mostrarse en $0 porque se calculan al cerrar caja.
 		</div>
 		
 	<a role="button" href="#modalVentas" data-toggle="modal" class="btn btn-config"><i class="glyphicon glyphicon-list-alt"></i> Reporte ventas</a>
