@@ -22,7 +22,7 @@
 	  	<div class="col-md-8">
 	    <div class="input-group">
 	      	<span class="input-group-addon">Nombre del Cliente</span>
-	      	<input type="text" id="nombre" name="nombre" class="form-control" pattern="[A-Z a-z]{1,10}" title="Solo puede ingresar letras" placeholder="Ingrese un nombre de cliente para la busqueda"/>
+	      	<input type="text" id="nombre" name="nombre" class="form-control" pattern="[A-Z a-z ]+" title="Solo puede ingresar letras" placeholder="Ingrese un nombre de cliente para la busqueda"/>
 	    </div>
 	   	</div>
 	  	<div class="row">    

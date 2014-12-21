@@ -23,7 +23,7 @@
 	  	<div class="col-md-7">
 	    <div class="input-group">
 	      	<span class="input-group-addon">Nombre del Gasto</span>
-	      	<input type="text" id="nombre" name="nombre" class="form-control" pattern="[A-Z a-z]{1,10}" title="Solo puede ingresar letras" placeholder="Ingrese un nombre de gasto para la busqueda"/>
+	      	<input type="text" id="nombre" name="nombre" class="form-control" pattern="[A-Z a-z ]+" title="Solo puede ingresar letras" placeholder="Ingrese un nombre de gasto para la busqueda"/>
 	    </div>
 	   	</div>
 	  	<div class="row">

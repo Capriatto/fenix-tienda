@@ -21,7 +21,7 @@
 	  	<div class="col-md-8">
 	    <div class="input-group">
 	      	<span class="input-group-addon">Nombre de la Empresa</span>
-	      	<input type="text" id="nombre" name="nombre" class="form-control" pattern="[A-Z a-z]{1,50}" title="Solo puede ingresar letras" placeholder="Ingrese el nombre de la empresa para la busqueda"/>
+	      	<input type="text" id="nombre" name="nombre" class="form-control"  pattern="[A-Z a-z ]+" title="Solo puede ingresar letras" placeholder="Ingrese el nombre de la empresa para la busqueda"/>
 	    </div>
 	   	</div>
 	  	<div class="row">    

@@ -24,7 +24,7 @@
 	  	<div class="col-md-7">
 	    <div class="input-group">
 	      	<span class="input-group-addon">Nombre del Producto</span>
-	      	<input type="text" id="nombre" name="nombre" class="form-control" pattern="[A-Z a-z]{1,50}" title="Solo puede ingresar letras" placeholder="Ingrese un nombre de producto para la busqueda" onBlur='this.value=this.value.toUpperCase();'>
+	      	<input type="text" id="nombre" name="nombre" class="form-control"  pattern="[A-Z a-z ]+" title="Solo puede ingresar letras" placeholder="Ingrese un nombre de producto para la busqueda" onBlur='this.value=this.value.toUpperCase();'>
 	    </div>
 	   	</div>
 	  	<div class="row">    

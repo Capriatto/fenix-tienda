@@ -42,7 +42,7 @@
     <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-addon">Nombre</span>
-      <input id="nombre" name="nombreTipoGasto" value="<?php echo $nombre;?>" class="form-control" pattern="[A-Z a-z]{1,30}" maxlength="30" title='Solo puede ingresar letras' placeholder="" type="text" onBlur='this.value=this.value.toUpperCase();' required>
+      <input id="nombre" name="nombreTipoGasto" value="<?php echo $nombre;?>" class="form-control"  pattern="[A-Z a-z ]+" maxlength="30" title='Solo puede ingresar letras' placeholder="" type="text" onBlur='this.value=this.value.toUpperCase();' required>
     </div>
    </div>
 	</div>
