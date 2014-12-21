@@ -71,7 +71,13 @@
 							}
 							elseif ($opcion==3) {
 								echo "<td><a href='registrar_abono.php?cli=".$fila2['codigo']."'>Registrar Abono</a></td>";
-							}												
+							}
+							elseif ($opcion==4) {
+								echo "<td><a href='lista_crediabonos_cliente.php?cod=".$fila2['codigo']."&cli=".$fila2['nombre']."&opc=1'>Ver Créditos y Abonos</a></td>";
+							}
+							else if($opcion==0){
+								echo "<td></td>";
+							}																				
 							echo "</tr>";
 					}
 					echo "</table>";

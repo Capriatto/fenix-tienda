@@ -15,7 +15,7 @@
     $base=$result['base'];
 
     if($base==''){
-    	header("Location: index.php");
+    	header("Location: bienvenida.php");
     }
 
 
