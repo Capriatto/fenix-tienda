@@ -67,7 +67,10 @@
 							echo "<td>".$fila2['vv']."</td>";
 							if($opcion==1){
 								echo "<td><a href='editar_precios.php?codi=".$fila2['cod']."&emp=".$fila2['codemp']."'>Actualizar Precios</a></td>";
-							}					
+							}
+							else if($opcion==0){
+								echo "<td></td>";
+							}						
 							echo "</tr>";
 					}
 					echo "</table>";

@@ -32,6 +32,10 @@
 					if($opcion==1){
 						echo "<td><a href='editar_precios.php?codi=".$fila['cod']."&emp=".$fila['codemp']."'>Actualizar Precios</a></td>";
 					}
+					else if($opcion==0){
+						echo "<td></td>";
+					}
+										
 					else if($opcion==2){
 						echo "<td><a href='agregar_proveedor.php?codpro=".$fila2['cod']."'>Agregar Proveedor a Producto</a></td>";
 					}

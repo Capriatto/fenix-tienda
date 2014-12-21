@@ -27,6 +27,7 @@
   <a href="buscar_producto_3.php?opcion=1" role="button" class="btn btn-config"><i class="glyphicon glyphicon-pencil"></i> Editar Producto</a>
   <a href="buscar_producto.php?opcion=1" role="button" class="btn btn-config"><i class="glyphicon glyphicon-refresh"></i> Actualizar Precios Producto</a>
   <a href="buscar_producto_3.php?opcion=2" role="button" class="btn btn-config"><i class="glyphicon glyphicon-plus"></i> Agregar Proveedor de Producto</a>
+  <a href="buscar_producto.php?opcion=0" role="button" class="btn btn-config"><i class="glyphicon glyphicon-list-alt"></i> Listado Productos</a>
   <h2>Registrar Producto</h2>
   <br>
   <div class="row">

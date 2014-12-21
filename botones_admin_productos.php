@@ -21,6 +21,9 @@
       window.location='buscar_producto_3.php?opcion=2';
   });
 
+  $("#listado-productos").click(function(){
+      window.location='buscar_producto.php?opcion=0';
+  });
 	  
   }); 
 	 
@@ -34,5 +37,7 @@
 <button type="button" id="editar-precios" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-pencil">   </span> Editar Precios</button>
 
 <button type="button" id="agregar-proveedor" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-plus">   </span> Agregar Proveedor</button>
+
+<button type="button" id="listado-productos" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-list-alt">   </span> Listado Productos</button>
 
 </fieldset>

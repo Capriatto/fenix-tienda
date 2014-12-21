@@ -70,9 +70,20 @@
 	}	
 
 	function guardarGasto($codigo, $observacion, $valor,$fecha, $tipogasto){
-		require("conexion.php");
-		
+		require("conexion.php");		
 		$id= generarId("gasto");
+
+		$diario="select * from diario where fecha='$fecha'";
+		$resultado= mysql_query($diario,$conexion);
+		$result=mysql_fetch_array($resultado);
+
+	    $totaldia=$result['total_dia'];
+
+	    if($totaldia!=''){
+	    	echo '<script>alert("No puede registrar gastos. La caja ya se ha cerrado");</script>';
+	    	echo "<script>window.location='botones_admin_factura.php';</script>";
+	    }
+
 		$result = mysql_query("SELECT codigo FROM tipo_gasto WHERE id=$tipogasto limit 1",$conexion);
 	
 		$tipoGasto = mysql_fetch_row($result);

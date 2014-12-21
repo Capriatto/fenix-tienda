@@ -15,9 +15,15 @@
     $("#registrar-cliente").click(function(){
       window.location='registrar_cliente.php';
     });
+
     $("#editar-cliente").click(function(){
       window.location='buscar_cliente.php?opcion=1';
-    });    
+    });
+
+    $("#ver-clientes").click(function(){
+      window.location='buscar_cliente.php?opcion=0';
+    });
+        
 
     $("#registrar-credito" ).click(function(){
       window.location='buscar_cliente.php?opcion=2';
@@ -26,6 +32,11 @@
     $("#registrar-abono" ).click(function(){
       window.location='buscar_cliente.php?opcion=3';
 	});
+
+  $("#ver-creditos-abonos" ).click(function(){
+      window.location='buscar_cliente.php?opcion=4';
+  });  
+
 	 
 	$("#registrar-gasto" ).click(function(){
       window.location='registrar_gasto.php';
@@ -55,6 +66,10 @@
       window.location='buscar_producto_3.php?opcion=2';
   });
 
+  $("#listado-productos").click(function(){
+      window.location='buscar_producto.php?opcion=0';
+  });  
+
 	$("#registrar-factura").click(function(){
         window.location='registrar_factura.php';
   });
@@ -81,6 +96,8 @@
 
 <button type="button" id="agregar-proveedor" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-plus">   </span> Agregar Proveedor</button>
 
+<button type="button" id="listado-productos" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-list-alt">   </span> Listado Productos</button>
+
 <button type="button" id="registrar-factura" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-briefcase">   </span> Registrar Factura</button>
 
 <button type="button" id="buscar-factura" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-search">   </span> Buscar Factura</button>
@@ -95,9 +112,13 @@
 
 <button type="button" id="editar-cliente" href="#" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-pencil">   </span> Editar Cliente</button>
 
+<button type="button" id="ver-clientes" href="#" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-search">   </span> Consultar Cliente</button>
+
 <button type="button" id="registrar-credito" href="#" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-usd">   </span> Registrar Crédito</button>
 
 <button type="button" id="registrar-abono" href="#" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-thumbs-up">   </span> Registrar Abono</button>
+
+<button type="button" id="ver-creditos-abonos" href="#" class="btn-metro btn-primary  " data-toggle="modal"><span class="glyphicon glyphicon-search">   </span> Ver Créditos y Abonos</button>
 
 </fieldset>
 
